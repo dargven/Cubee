@@ -1,5 +1,5 @@
 class Cube extends Figure {
-    constructor(x = -5, y = -5, z = -5, size = 10) {
+    constructor(x = -5, y = -5, z = -5, size = 10) {//--?????
         super();
         this.points = [
             new Point(10, 10, 10),
@@ -28,9 +28,9 @@ class Cube extends Figure {
         ];
         this.polygons = [
             new Polygon([0,1,2,3],'red'),
-             new Polygon([4,0,3,7],'blue'),
-             new Polygon([1,2,6,5],'green'),
-             new Polygon([0,1,5,4],'pink'),
+            new Polygon([4,0,3,7],'blue'),
+            new Polygon([1,2,6,5],'green'),
+            new Polygon([0,1,5,4],'pink'),
             new Polygon([6,7,3,2],'yellow'),
             new Polygon([5,4,7,6],'grey')
         ]

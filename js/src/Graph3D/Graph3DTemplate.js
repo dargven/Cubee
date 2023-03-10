@@ -8,5 +8,8 @@ Template.prototype.Graph3D = () =>
                 <option value="Example">Example</option>
                 <option value="Example">Example</option>
             </select>
+            <p>
+            Введите цвет: <input type = "text" id = "color">
+            </p>
             <canvas id="canvas3d"></canvas>
 `

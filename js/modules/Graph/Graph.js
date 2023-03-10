@@ -25,7 +25,7 @@
         this.context.fillStyle = '#fafafa';
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    line(x1, y1, x2, y2, color = '#000', width = 3, isDashed = false) {
+    line(x1, y1, x2, y2, color = '#000', width = 1, isDashed = false) {
         this.context.beginPath();
         this.context.lineWidth = width;
         if (isDashed) {
@@ -56,20 +56,16 @@
         this.context.fillText(text, this.xs(x), this.ys(y));
     }
     polygon(points, color = 'blue') {
-        // if (points.length >= 3) {
 
             this.context.beginPath();
-            // this.context.lineWidth = width;
-            // this.context.strokeStyle = color;
-            this.context.fillStyle = color //+ '40';
+            this.context.fillStyle = color;
             this.context.moveTo(this.xs(points[0].x), this.ys(points[0].y));
             for (let i = 1; i < points.length; i++) {
                 this.context.lineTo(this.xs(points[i].x), this.ys(points[i].y));
             }
-            // this.context.lineTo(this.xs(points[0].x), this.ys(points[0].y));
             this.context.fill();
             this.context.closePath();
             this.context.stroke();
-        // }
+
     }
 }

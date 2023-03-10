@@ -8,6 +8,7 @@
             HEIGHT: 20,
             FOCUS: new Point(0, 0, 30),
             CAMERA: new Point(0, 0, 50)
+
         };
         this.graph = new Graph({
             id: 'canvas3d',
@@ -31,6 +32,7 @@
         this.figure = this.scene[document.getElementById('selectentities').value];
         this.canRotate = false;
         this.renderScene(this.figure);
+        this.LIGHT = new Light(-20,20,10);
     }
 
 
@@ -40,7 +42,7 @@
             this.math3D.zoom(delta, point);
         });
         this.renderScene(this.figure);
-        console.log(this.figure, ' ---= До EventListener(wheel)');
+
     }
 
     mouseup() {
@@ -61,6 +63,7 @@
         this.graph.clear();
         this.math3D.calcCenters(figure);
         this.math3D.calcDitance(figure,this.WIN.CAMERA,'distance');
+        this.math3D.calcDitance(figure,this.LIGHT,'lumen')
         this.math3D.sortByArtistAlgoritm(figure.polygons);
         figure.polygons.forEach(polygon => {
             const points = [
@@ -69,6 +72,11 @@
                 figure.points[polygon.points[2]],
                 figure.points[polygon.points[3]]
             ];
+            let {r,g,b} = polygon.color;
+            const lumen = this.math3D.calcIllumination(polygon.lumen, this.LIGHT.lumen);
+            r = Math.round(r*lumen);
+            g = Math.round((g*lumen));
+            b = Math.round(b*lumen);
 
             this.graph.polygon(
                 points.map(point => {
@@ -76,10 +84,10 @@
                         x:this.math3D.xs(point),
                         y:this.math3D.ys(point)
                     }
-                }),polygon.color)
+                }),'red')
 
-        })
-        this.figure.edges.forEach(({ p1, p2 }) => {
+        })/////Ниже можно убирать, чтобы убрать ребра у фигуры
+            this.figure.edges.forEach(({ p1, p2 }) => {
             const point1 = this.figure.points[p1];
             const point2 = this.figure.points[p2];
             this.graph.line(
@@ -95,6 +103,7 @@
                 this.math3D.ys(point)
             );
         });
+
     }
     mousemove(event) {
         if (this.canRotate) {
@@ -105,7 +114,7 @@
             });
             this.renderScene(this.figure);
         }
-        console.log(this.figure, ' ---= До EventListener(mousemove)');
+
     }
 
     addEventListeners() {
@@ -113,6 +122,7 @@
         selector.addEventListener('change', () =>{
             this.figure = this.scene[document.getElementById('selectentities').value];
             this.renderScene(this.figure);
+
         })
     }
 
