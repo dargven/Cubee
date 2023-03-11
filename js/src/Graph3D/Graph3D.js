@@ -26,13 +26,15 @@
         this.math3D = new Math3D({ WIN: this.WIN });
         this.scene = {
             Cube: new Cube(),
-            Sphere: new Sphere()
+            Sphere: new Sphere(),
+            Ellipsoid : new Ellipsoid(),
+            Tor: new Tor()
         };
 
         this.figure = this.scene[document.getElementById('selectentities').value];
         this.canRotate = false;
         this.renderScene(this.figure);
-        this.LIGHT = new Light(-20,20,10);
+        // this.LIGHT = new Light(-20,20,10);
     }
 
 
@@ -63,7 +65,7 @@
         this.graph.clear();
         this.math3D.calcCenters(figure);
         this.math3D.calcDitance(figure,this.WIN.CAMERA,'distance');
-        this.math3D.calcDitance(figure,this.LIGHT,'lumen')
+        // this.math3D.calcDitance(figure,this.LIGHT,'lumen')
         this.math3D.sortByArtistAlgoritm(figure.polygons);
         figure.polygons.forEach(polygon => {
             const points = [
@@ -72,11 +74,11 @@
                 figure.points[polygon.points[2]],
                 figure.points[polygon.points[3]]
             ];
-            let {r,g,b} = polygon.color;
-            const lumen = this.math3D.calcIllumination(polygon.lumen, this.LIGHT.lumen);
-            r = Math.round(r*lumen);
-            g = Math.round((g*lumen));
-            b = Math.round(b*lumen);
+            // let {r,g,b} = polygon.color;
+            // const lumen = this.math3D.calcIllumination(polygon.lumen, this.LIGHT.lumen);
+            // r = Math.round(r*lumen);
+            // g = Math.round((g*lumen));
+            // b = Math.round(b*lumen);
 
             this.graph.polygon(
                 points.map(point => {
@@ -84,7 +86,8 @@
                         x:this.math3D.xs(point),
                         y:this.math3D.ys(point)
                     }
-                }),'red')
+
+                }),polygon.color)
 
         })/////Ниже можно убирать, чтобы убрать ребра у фигуры
             this.figure.edges.forEach(({ p1, p2 }) => {
@@ -119,12 +122,21 @@
 
     addEventListeners() {
         const selector = document.getElementById('selectentities');
-        selector.addEventListener('change', () =>{
+        selector.addEventListener('change', () => {
             this.figure = this.scene[document.getElementById('selectentities').value];
             this.renderScene(this.figure);
-
         })
-    }
+        const colorPicker = document.getElementById('colorSelector');
+        colorPicker.addEventListener('change', () =>{
+            this.figure.recolor(colorPicker.value);
+            this.renderScene(this.figure);
+        })
+        const selectedColor = document.getElementById('selectentities')
+        selectedColor.addEventListener('change', () =>{
+            this.figure.recolor(colorPicker.value);
+            this.renderScene(this.figure);
+        })
+            }
 
 
 }

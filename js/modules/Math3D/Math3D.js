@@ -88,12 +88,12 @@
     sortByArtistAlgoritm(polygons) {
         polygons.sort((a, b) => b.distance - a.distance)
     }
-    calcIllumination(distance,lumen){
-        const res = distance ? lumen / Math.pow(
-            distance,3
-        ):1;
-        return res > 1? 1: res;
-    }
+    // calcIllumination(distance,lumen){
+    //     const res = distance ? lumen / Math.pow(
+    //         distance,3
+    //     ):1;
+    //     return res > 1? 1: res;
+    // }
 
 }//В сфере радиус и количество точек. Выбирать у каждой фигуру.
 //Все, что связано с трехмерной графикой здесь.

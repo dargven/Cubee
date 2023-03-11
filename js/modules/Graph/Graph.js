@@ -40,7 +40,7 @@
         this.context.closePath();
         this.context.setLineDash([]);
     }
-    point(x, y, color = '#1a2b3c', size = 3) {
+    point(x, y, color = '#1a2b3c', size = 1) {
         this.context.beginPath();
         this.context.strokeStyle = color;
         this.context.fillStyle = color;
