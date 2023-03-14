@@ -4,7 +4,7 @@
 // T = [0..PI]
 // p = [0..2*PI]
 class Sphere extends Figure {
-    constructor(r = 10, count = 20,color = 'blue') {
+    constructor(r = 10 , count = 20,color = 'blue') {
         super();
         //about points
         const points = [];

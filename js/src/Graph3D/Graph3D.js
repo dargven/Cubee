@@ -67,46 +67,51 @@
         this.math3D.calcDitance(figure,this.WIN.CAMERA,'distance');
         // this.math3D.calcDitance(figure,this.LIGHT,'lumen')
         this.math3D.sortByArtistAlgoritm(figure.polygons);
-        figure.polygons.forEach(polygon => {
-            const points = [
-                figure.points[polygon.points[0]],
-                figure.points[polygon.points[1]],
-                figure.points[polygon.points[2]],
-                figure.points[polygon.points[3]]
-            ];
-            // let {r,g,b} = polygon.color;
-            // const lumen = this.math3D.calcIllumination(polygon.lumen, this.LIGHT.lumen);
-            // r = Math.round(r*lumen);
-            // g = Math.round((g*lumen));
-            // b = Math.round(b*lumen);
+        if(this.polygons) {
+            figure.polygons.forEach(polygon => {
+                const points = [
+                    figure.points[polygon.points[0]],
+                    figure.points[polygon.points[1]],
+                    figure.points[polygon.points[2]],
+                    figure.points[polygon.points[3]]
+                ];
+                // let {r,g,b} = polygon.color;
+                // const lumen = this.math3D.calcIllumination(polygon.lumen, this.LIGHT.lumen);
+                // r = Math.round(r*lumen);
+                // g = Math.round((g*lumen));
+                // b = Math.round(b*lumen);
 
-            this.graph.polygon(
-                points.map(point => {
-                    return{
-                        x:this.math3D.xs(point),
-                        y:this.math3D.ys(point)
-                    }
+                this.graph.polygon(
+                    points.map(point => {
+                        return {
+                            x: this.math3D.xs(point),
+                            y: this.math3D.ys(point)
+                        }
 
-                }),polygon.color)
+                    }), polygon.color)
 
-        })/////Ниже можно убирать, чтобы убрать ребра у фигуры
-            this.figure.edges.forEach(({ p1, p2 }) => {
-            const point1 = this.figure.points[p1];
-            const point2 = this.figure.points[p2];
-            this.graph.line(
-                this.math3D.xs(point1),
-                this.math3D.ys(point1),
-                this.math3D.xs(point2),
-                this.math3D.ys(point2)
-            );
-        });
-        this.figure.points.forEach(point => {
-            this.graph.point(
-                this.math3D.xs(point),
-                this.math3D.ys(point)
-            );
-        });
-
+            })
+        }
+        if(this.edges) {
+            this.figure.edges.forEach(({p1, p2}) => {
+                const point1 = this.figure.points[p1];
+                const point2 = this.figure.points[p2];
+                this.graph.line(
+                    this.math3D.xs(point1),
+                    this.math3D.ys(point1),
+                    this.math3D.xs(point2),
+                    this.math3D.ys(point2)
+                );
+            });
+        }
+        if(this.points) {
+            this.figure.points.forEach(point => {
+                this.graph.point(
+                    this.math3D.xs(point),
+                    this.math3D.ys(point)
+                );
+            });
+        }
     }
     mousemove(event) {
         if (this.canRotate) {
@@ -136,7 +141,32 @@
             this.figure.recolor(colorPicker.value);
             this.renderScene(this.figure);
         })
-            }
+        this.edges = true;
+        const edgesCheck = document.querySelector('#edges');
+        edgesCheck.addEventListener('change', () =>{
+            this.edges = edgesCheck.checked;
+            this.renderScene(this.figure);
+        })
+        this.points = true;
+        const pointsCheck = document.querySelector('#points');
+        pointsCheck.addEventListener('change', () =>{
+            this.points = pointsCheck.checked;
+            this.renderScene(this.figure);
+        })
+        this.polygons = true;
+        const polygonsCheck = document.querySelector('#polygons');
+        polygonsCheck.addEventListener('change', () =>{
+            this.polygons = polygonsCheck.checked;
+            this.renderScene(this.figure);
+        })
+        const countP = document.querySelector('#count')
+        countP.addEventListener('change', () =>{
+            this.nmbOfCnt = countP.value;
+            this.renderScene(this.figure);
+
+        })
+
+        }
 
 
 }

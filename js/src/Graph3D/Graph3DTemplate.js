@@ -10,6 +10,11 @@ Template.prototype.Graph3D = () =>
             </select>
             <p>
            <input type = "color" id = "colorSelector">
+           <input type="checkbox" id="polygons" checked> Полигоны
+           <input type="checkbox" id="edges"checked> Ребра
+            <input type="checkbox" id="points"checked> Точки
+            <input type = "range" min = "1" max = "100" id="radius"> Радиус
+            <input type = "range" min = "1" max = "100" id="count">Количество точек
             </p>
             
             <canvas id="canvas3d"></canvas>

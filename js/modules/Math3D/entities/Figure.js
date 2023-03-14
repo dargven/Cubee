@@ -10,4 +10,5 @@ class Figure {
             polygon.color = color;
         })
     }
+
 }
