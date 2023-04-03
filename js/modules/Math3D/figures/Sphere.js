@@ -4,7 +4,7 @@
 // T = [0..PI]
 // p = [0..2*PI]
 class Sphere extends Figure {
-    constructor(r = 10 , count = 20,color = 'blue') {
+    constructor(r = 10, count = 20, color = 'blue') {
         super();
         //about points
         const points = [];
@@ -32,40 +32,38 @@ class Sphere extends Figure {
             }
             if (points[i + count]) {
                 edges.push(new Edge(i, i + count))
-             }
+            }
         }
 
         //about polygons
         const polygons = [];
         for (let i = 0; i < points.length; i++) {
             if (points[i + 1 + count]) {
-                if ((i + 1) % count === 0){
+                if ((i + 1) % count === 0) {
                     polygons.push(new Polygon([
                             i,
-                            i + 1-count,
+                            i + 1 - count,
                             i + 1,
                             i + count],
                         color));
-                }
-                else{
+                } else {
                     polygons.push(new Polygon([
-                        i,
-                        i + 1,
-                        i + 1 + count,
-                        i + count],
+                            i,
+                            i + 1,
+                            i + 1 + count,
+                            i + count],
                         color));
                 }
             }
 
             const lastNo = points.length - 1;
-            const penultimatel = lastNo-count;
+            const penultimatel = lastNo - count;
             polygons.push(new Polygon([
                 penultimatel,
                 penultimatel + 1 - count,
                 penultimatel + 1,
                 penultimatel + count
-            ],color))
-
+            ], color))
 
 
         }

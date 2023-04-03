@@ -4,6 +4,7 @@
         this.y = y;
         this.z = z;
     }
+
     makeFromArray(array) {
         this.x = array[0];
         this.y = array[1];

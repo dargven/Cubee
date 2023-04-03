@@ -75,25 +75,25 @@
 
     }
 
-    calcDitance(figure, endPoint, name) {
+    calcDistance(figure, endPoint, name) {
         figure.polygons.forEach(polygon => {
             polygon[name] = Math.sqrt(
                 Math.pow(endPoint.x - polygon.center.x, 2) +
                 Math.pow(endPoint.y - polygon.center.y, 2) +
-                Math.pow(endPoint.z - polygon.center.z, 2)
-            )
-        })
+                Math.pow(endPoint.z - polygon.center.z, 2));
+        });
+    }
+
+
+    calcIllumination(distance, lumen) {
+        const res = distance ? lumen / Math.pow(
+            distance, 3
+        ) : 1;
+        return res > 1 ? 1 : res;
     }
 
     sortByArtistAlgoritm(polygons) {
         polygons.sort((a, b) => b.distance - a.distance)
     }
-    // calcIllumination(distance,lumen){
-    //     const res = distance ? lumen / Math.pow(
-    //         distance,3
-    //     ):1;
-    //     return res > 1? 1: res;
-    // }
-
 }//В сфере радиус и количество точек. Выбирать у каждой фигуру.
 //Все, что связано с трехмерной графикой здесь.

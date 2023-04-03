@@ -10,13 +10,13 @@
             }
         });
         this.componentList = {
-            Graph3D: new Graph3D({ 
-                id: 'Graph3D', 
-                parent: this.id, 
-                template: template.Graph3D 
+            Graph3D: new Graph3D({
+                id: 'Graph3D',
+                parent: this.id,
+                template: template.Graph3D
             }),
-            component3: new Component({ id: 'component3', parent: this.id }),
-            component4: new Component({ id: 'component4', parent: this.id })
+            component3: new Component({id: 'component3', parent: this.id}),
+            component4: new Component({id: 'component4', parent: this.id})
         };
 
         this.showMenuItem('Graph3D');

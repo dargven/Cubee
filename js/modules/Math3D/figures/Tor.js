@@ -32,17 +32,16 @@ class Tor extends Figure {
         }
         //about polygons
         const polygons = [];
-        for (let i = 0; i < points.length; i++){
+        for (let i = 0; i < points.length; i++) {
             if (points[i + 1 + count]) {
-                if ((i + 1) % count === 0){
+                if ((i + 1) % count === 0) {
                     polygons.push(new Polygon([
                             i,
-                            i + 1-count,
+                            i + 1 - count,
                             i + 1,
                             i + count],
                         color));
-                }
-                else{
+                } else {
                     polygons.push(new Polygon([
                             i,
                             i + 1,
@@ -53,13 +52,13 @@ class Tor extends Figure {
             }
 
             const lastNo = points.length - 1;
-            const penultimatel = lastNo-count;
+            const penultimatel = lastNo - count;
             polygons.push(new Polygon([
                 penultimatel,
                 penultimatel + 1 - count,
                 penultimatel + 1,
                 penultimatel + count
-            ],color))
+            ], color))
         }
         this.points = points;
         this.polygons = polygons;

@@ -1,5 +1,5 @@
 ﻿class Graph {
-    constructor({ id, width = 500, height = 500, WIN, callbacks }) {
+    constructor({id, width = 500, height = 500, WIN, callbacks}) {
         this.canvas = document.getElementById(id);
         this.context = this.canvas.getContext('2d');
 
@@ -7,7 +7,7 @@
         this.canvas.height = height;
 
         this.WIN = WIN;
-        const { wheel, mouseup, mousedown, mousemove, mouseleave } = callbacks;
+        const {wheel, mouseup, mousedown, mousemove, mouseleave} = callbacks;
 
         this.canvas.addEventListener('wheel', wheel);
         this.canvas.addEventListener('mousedown', mousedown);
@@ -15,16 +15,28 @@
         this.canvas.addEventListener('mousemove', mousemove);
         this.canvas.addEventListener('mouseleave', mouseleave);
     }
-    xs(x) { return (x - this.WIN.LEFT) * this.canvas.width / this.WIN.WIDTH }
-    ys(y) { return (this.WIN.HEIGHT + this.WIN.BOTTOM - y) * this.canvas.height / this.WIN.HEIGHT; }
 
-    sx(x) { return x * this.WIN.WIDTH / this.canvas.width; }
-    sy(y) { return -y * this.WIN.HEIGHT / this.canvas.height; }
+    xs(x) {
+        return (x - this.WIN.LEFT) * this.canvas.width / this.WIN.WIDTH
+    }
+
+    ys(y) {
+        return (this.WIN.HEIGHT + this.WIN.BOTTOM - y) * this.canvas.height / this.WIN.HEIGHT;
+    }
+
+    sx(x) {
+        return x * this.WIN.WIDTH / this.canvas.width;
+    }
+
+    sy(y) {
+        return -y * this.WIN.HEIGHT / this.canvas.height;
+    }
 
     clear() {
         this.context.fillStyle = '#fafafa';
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
+
     line(x1, y1, x2, y2, color = '#000', width = 1, isDashed = false) {
         this.context.beginPath();
         this.context.lineWidth = width;
@@ -40,6 +52,7 @@
         this.context.closePath();
         this.context.setLineDash([]);
     }
+
     point(x, y, color = '#1a2b3c', size = 1) {
         this.context.beginPath();
         this.context.strokeStyle = color;
@@ -49,23 +62,25 @@
         this.context.stroke();
         this.context.closePath();
     }
+
     text(x, y, text, color = "black", font = "12px sans-serif", align = "center") {
         this.context.font = font;
         this.context.fillStyle = color;
         this.context.textAlign = align;
         this.context.fillText(text, this.xs(x), this.ys(y));
     }
+
     polygon(points, color = 'blue') {
 
-            this.context.beginPath();
-            this.context.fillStyle = color;
-            this.context.moveTo(this.xs(points[0].x), this.ys(points[0].y));
-            for (let i = 1; i < points.length; i++) {
-                this.context.lineTo(this.xs(points[i].x), this.ys(points[i].y));
-            }
-            this.context.fill();
-            this.context.closePath();
-            this.context.stroke();
+        this.context.beginPath();
+        this.context.fillStyle = color;
+        this.context.moveTo(this.xs(points[0].x), this.ys(points[0].y));
+        for (let i = 1; i < points.length; i++) {
+            this.context.lineTo(this.xs(points[i].x), this.ys(points[i].y));
+        }
+        this.context.fill();
+        this.context.closePath();
+        this.context.stroke();
 
     }
 }

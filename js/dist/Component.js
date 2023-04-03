@@ -1,17 +1,20 @@
 ﻿class Component {
-    constructor({ id, parent, template = () => '<div></div>', templateParams = null, callbacks = {}, className }) {
+    constructor({id, parent, template = () => '<div></div>', templateParams = null, callbacks = {}, className}) {
         this.id = id;
         this.parent = parent;
         this.callbacks = callbacks;
         this.render(template(templateParams), className);
         this.addEventListeners();
     }
+
     show() {
         document.getElementById(this.id).classList.remove('hidden');
     }
+
     hide() {
         document.getElementById(this.id).classList.add('hidden');
     }
+
     render(template, className) {
         const elem = document.createElement('div');
         elem.setAttribute('id', this.id);
@@ -25,6 +28,7 @@
             document.querySelector('body').appendChild(elem);
         }
     }
+
     addEventListeners() {
 
     }
